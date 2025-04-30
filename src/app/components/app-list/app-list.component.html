@@ -1,0 +1,98 @@
+<div class="container">
+  <h2>Application List</h2>
+
+  <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 20px;">
+    <mat-label>Search Apps</mat-label>
+    <input matInput [(ngModel)]="searchText" (input)="applyFilter()" placeholder="Enter app name">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="filteredApps" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let app"> {{app.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let app"> {{app.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="version">
+      <th mat-header-cell *matHeaderCellDef> Version </th>
+      <td mat-cell *matCellDef="let app"> {{app.version}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let app"> {{app.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="age_boundry">
+      <th mat-header-cell *matHeaderCellDef> Age Boundry </th>
+      <td mat-cell *matCellDef="let app"> {{app.age_boundry}}+</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type_flag">
+      <th mat-header-cell *matHeaderCellDef> Type Flag </th>
+      <td mat-cell *matCellDef="let app"> {{app.type_flag}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> Category </th>
+      <td mat-cell *matCellDef="let app"> {{app.category}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="publisher_id">
+      <th mat-header-cell *matHeaderCellDef> Publisher ID </th>
+      <td mat-cell *matCellDef="let app"> {{app.publisher_id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef> Size (MB) </th>
+      <td mat-cell *matCellDef="let app"> {{app.size}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let app"> {{app.price | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="publication_date">
+      <th mat-header-cell *matHeaderCellDef> Published </th>
+      <td mat-cell *matCellDef="let app"> {{app.publication_date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="last_update_date">
+      <th mat-header-cell *matHeaderCellDef> Last Update </th>
+      <td mat-cell *matCellDef="let app"> {{app.last_update_date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="new_features">
+      <th mat-header-cell *matHeaderCellDef> New Features </th>
+      <td mat-cell *matCellDef="let app"> {{app.new_features}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="available_countries">
+      <th mat-header-cell *matHeaderCellDef> Available In </th>
+      <td mat-cell *matCellDef="let app">
+        <ng-container *ngIf="app.available_countries?.length; else noCountries">
+          {{ app.available_countries.join(', ') }}
+        </ng-container>
+        <ng-template #noCountries>
+          <em>None</em>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let app">
+        <button mat-button color="warn" (click)="deleteApp(app.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

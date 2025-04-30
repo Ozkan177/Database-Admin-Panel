@@ -1,0 +1,109 @@
+<p>review-form works!</p>
+<div class="container">
+  <h2>Submit a Review</h2>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+
+    <!-- User -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Select User</mat-label>
+      <mat-select formControlName="user">
+        <mat-option *ngFor="let user of users" [value]="user">{{ user }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="reviewForm.get('user')?.invalid && reviewForm.get('user')?.touched">
+        User required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- App -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Select App</mat-label>
+      <mat-select formControlName="app">
+        <mat-option *ngFor="let app of apps" [value]="app">{{ app }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="reviewForm.get('app')?.invalid && reviewForm.get('app')?.touched">
+        App required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Comment -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Your Comment</mat-label>
+      <textarea matInput rows="3" formControlName="comment" placeholder="Write your thoughts..."></textarea>
+      <mat-error *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched">
+        Comment required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Rating -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Rating (0 to 5)</mat-label>
+      <input matInput type="number" formControlName="rating" min="0" max="5">
+      <mat-error *ngIf="reviewForm.get('rating')?.invalid && reviewForm.get('rating')?.touched">
+        Rating must be 0–5
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit -->
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+<!-- Bu alt kısım backend tarafını açınca yorum  satırını aç. -->
+<div class="container">
+  <h2>Submit a Review</h2>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+
+    <!-- User -->
+    <!-- <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Select User</mat-label>
+      <mat-select formControlName="user">
+        <mat-option *ngFor="let user of users" [value]="user.email">
+          {{ user.email }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="reviewForm.get('user')?.invalid && reviewForm.get('user')?.touched">
+        User required
+      </mat-error>
+    </mat-form-field> -->
+
+    <!-- App -->
+    <!-- <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Select App</mat-label>
+      <mat-select formControlName="app">
+        <mat-option *ngFor="let app of apps" [value]="app.name">
+          {{ app.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="reviewForm.get('app')?.invalid && reviewForm.get('app')?.touched">
+        App required
+      </mat-error>
+    </mat-form-field> -->
+
+    <!-- Comment -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Your Comment</mat-label>
+      <textarea matInput rows="3" formControlName="comment" placeholder="Write your thoughts..."></textarea>
+      <mat-error *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched">
+        Comment required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Rating -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Rating (0 to 5)</mat-label>
+      <input matInput type="number" formControlName="rating" min="0" max="5">
+      <mat-error *ngIf="reviewForm.get('rating')?.invalid && reviewForm.get('rating')?.touched">
+        Rating must be between 0 and 5
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit -->
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>

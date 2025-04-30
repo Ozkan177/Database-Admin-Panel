@@ -1,0 +1,15 @@
+.container {
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  text-align: center;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+}

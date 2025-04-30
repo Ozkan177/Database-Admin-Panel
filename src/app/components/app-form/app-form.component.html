@@ -1,0 +1,52 @@
+<p>app-form works!</p>
+<div class="container">
+  <h2>Add New Application</h2>
+
+  <form [formGroup]="appForm" (ngSubmit)="onSubmit()">
+
+    <!-- Name -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>App Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter name">
+    </mat-form-field>
+
+    <!-- Price -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Price</mat-label>
+      <input matInput type="number" formControlName="price">
+    </mat-form-field>
+
+    <!-- Category -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category">
+    </mat-form-field>
+
+    <!-- Available Countries -->
+    <label><strong>Available Countries:</strong></label><br>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Search Country</mat-label>
+      <input matInput [(ngModel)]="countrySearch" (input)="filterCountries()" placeholder="Type to filter...">
+    </mat-form-field>
+
+    <mat-checkbox (change)="onToggleSelectAll($event.checked)">Select / Deselect All</mat-checkbox><br><br>
+
+    <div *ngIf="filteredCountries.length > 0">
+      <mat-checkbox
+        *ngFor="let country of filteredCountries"
+        [checked]="appForm.value.availableCountries.includes(country)"
+        (change)="onCheckboxChange(country, $event.checked)">
+        {{ country }}
+      </mat-checkbox>
+    </div>
+
+    <div *ngIf="appForm.get('availableCountries')?.invalid && appForm.get('availableCountries')?.touched" style="color: red;">
+      At least one country must be selected.
+    </div>
+
+    <br><br>
+
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>
