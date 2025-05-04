@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { AppService, App } from '../../services/app.service'; // 🔥 Backend hazır olunca açılacak
 
 @Component({
   selector: 'app-app-list',
@@ -23,7 +24,8 @@ export class AppListComponent implements OnInit {
       publication_date: '2023-01-01',
       last_update_date: '2024-03-15',
       new_features: 'New levels added!',
-      available_countries: ['USA', 'Germany', 'Japan']
+      available_countries: ['USA', 'Germany', 'Japan'],
+      average_rating: 4.3 // 🆕 EKLENDİ
     },
     {
       id: 2,
@@ -39,7 +41,8 @@ export class AppListComponent implements OnInit {
       publication_date: '2022-05-10',
       last_update_date: '2024-04-01',
       new_features: 'Dark mode, new UI',
-      available_countries: ['USA', 'Turkey', 'India']
+      available_countries: ['USA', 'Turkey', 'India'],
+      average_rating: 4.8 // 🆕 EKLENDİ
     },
     {
       id: 3,
@@ -55,7 +58,8 @@ export class AppListComponent implements OnInit {
       publication_date: '2020-09-23',
       last_update_date: '2023-12-05',
       new_features: 'Voice recognition improved',
-      available_countries: ['Germany', 'France', 'Brazil']
+      available_countries: ['Germany', 'France', 'Brazil'],
+      average_rating: 4 // 🆕 EKLENDİ
     },
     {
       id: 4,
@@ -71,7 +75,9 @@ export class AppListComponent implements OnInit {
       publication_date: '2021-02-12',
       last_update_date: '2024-01-10',
       new_features: 'Improved player, subtitles',
-      available_countries: ['USA', 'UK', 'Canada']
+      available_countries: ['USA', 'UK', 'Canada'],
+      average_rating: 4.8 // 🆕 EKLENDİ
+
     },
     {
       id: 5,
@@ -87,17 +93,47 @@ export class AppListComponent implements OnInit {
       publication_date: '2019-06-18',
       last_update_date: '2024-03-20',
       new_features: 'New tanks, maps',
-      available_countries: ['Poland', 'Russia', 'USA']
+      available_countries: ['Poland', 'Russia', 'USA'],
+      average_rating: 4.8 // 🆕 EKLENDİ
+
     }
   ];
 
 
   filteredApps = [...this.apps];
   searchText: string = '';
+  editAppId: number | null = null;
+
+  startEdit(appId: number) {
+    this.editAppId = appId;
+  }
+
+  savePrice(app: any) {
+    console.log(`Saving price for App ID ${app.id}: ${app.price}`);
+
+    // Backend için:
+    /*
+    this.appService.updateAppPrice(app.id, app.price).subscribe({
+      next: () => {
+        console.log('Price updated on backend.');
+      },
+      error: (err) => {
+        console.error('Failed to update price:', err);
+      }
+    });
+    */
+
+    // Edit moddan çık
+    this.editAppId = null;
+  }
+
+  cancelEdit() {
+    this.editAppId = null;
+  }
 
   displayedColumns: string[] = [
     'id', 'name', 'version', 'description', 'age_boundry', 'type_flag', 'category',
-    'publisher_id', 'size', 'price', 'publication_date', 'last_update_date',
+    'publisher_id', 'size','average_rating', 'price', 'publication_date', 'last_update_date',
     'new_features', 'available_countries', 'actions'
   ];
 
@@ -127,7 +163,22 @@ export class AppListComponent implements OnInit {
       app.name.toLowerCase().includes(searchTerm)
     );
   }
+
+  updatePrice(app: any) {
+    console.log(`Price updated for App ID ${app.id}: ${app.price}`);
+
+    // Backend için:
+    /*
+    this.appService.updateAppPrice(app.id, app.price).subscribe({
+      next: () => {
+        console.log('Price updated on backend.');
+      },
+      error: (err) => {
+        console.error('Failed to update price:', err);
+      }
+    });
+    */
+  }
+
+
 }
-
-
-

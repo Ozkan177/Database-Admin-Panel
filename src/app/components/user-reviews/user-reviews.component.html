@@ -1,0 +1,63 @@
+<p>user-reviews works!</p>
+<div class="container">
+  <h2>User Reviews</h2>
+
+  <!-- Kullanıcı seçimi -->
+  <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 20px;">
+    <mat-label>Select User</mat-label>
+    <mat-select [(value)]="selectedUser" (selectionChange)="onUserChange()">
+      <mat-option *ngFor="let user of users" [value]="user">
+        {{ user }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Kullanıcının yaptığı yorumlar -->
+  <div *ngIf="selectedUser">
+    <h3>Reviews by {{ selectedUser }}</h3>
+    <table mat-table [dataSource]="userReviews" class="mat-elevation-z8" *ngIf="userReviews.length > 0">
+
+      <ng-container matColumnDef="appName">
+        <th mat-header-cell *matHeaderCellDef>App</th>
+        <td mat-cell *matCellDef="let review">{{ review.appName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef>Comment</th>
+        <td mat-cell *matCellDef="let review">{{ review.comment }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef>Rating</th>
+        <td mat-cell *matCellDef="let review">{{ review.rating }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['appName', 'comment', 'rating']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['appName', 'comment', 'rating'];"></tr>
+    </table>
+
+    <p *ngIf="userReviews.length === 0">No reviews yet.</p>
+
+    <!-- Kullanıcının yorum yapmadığı uygulamalar -->
+    <h3 style="margin-top: 30px;">Apps without Review</h3>
+    <table mat-table [dataSource]="appsWithoutReview" class="mat-elevation-z8" *ngIf="appsWithoutReview.length > 0">
+
+      <ng-container matColumnDef="appName">
+        <th mat-header-cell *matHeaderCellDef>App</th>
+        <td mat-cell *matCellDef="let app">{{ app.appName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let app">
+          <button mat-button color="primary" (click)="writeReview(app.appName)">Write Review</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['appName', 'action']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['appName', 'action'];"></tr>
+    </table>
+
+    <p *ngIf="appsWithoutReview.length === 0">No apps without review.</p>
+  </div>
+</div>

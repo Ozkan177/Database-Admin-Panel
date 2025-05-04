@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class AppService {
   private apiUrl = 'http://localhost:8080/api/apps'; // TODO: backend endpoint
 
@@ -25,4 +28,5 @@ export class AppService {
   updateApp(id: number, appData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, appData);
   }
+
 }

@@ -20,7 +20,8 @@ import { FormsModule } from '@angular/forms'; // NgModel için
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatIconModule } from '@angular/material/icon';
+import { UserReviewsComponent } from './components/user-reviews/user-reviews.component';
 
 
 
@@ -34,7 +35,8 @@ import { MatCardModule } from '@angular/material/card';
     CountryListComponent,
     BoughtItemsComponent,
     ReviewFormComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserReviewsComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

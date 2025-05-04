@@ -7,6 +7,7 @@ import { BoughtItemsComponent } from './components/bought-items/bought-items.com
 import { CountryListComponent } from './components/country-list/country-list.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { UserReviewsComponent } from './components/user-reviews/user-reviews.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'users', component: UserListComponent },
   { path: 'countries', component: CountryListComponent },
   { path: 'bought', component: BoughtItemsComponent },
-  { path: 'review', component: ReviewFormComponent }
+  { path: 'review', component: ReviewFormComponent },
+  {path: 'user-reviews',component: UserReviewsComponent}
+
 ];
 
 @NgModule({
